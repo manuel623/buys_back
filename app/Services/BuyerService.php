@@ -68,7 +68,7 @@ class BuyerService
         }
     }
 
-    public function editBuyer($data, $phone)
+    public function editBuyer($data, $id)
     {
         $validator = $this->validatorBuyer($data);
         
@@ -77,7 +77,7 @@ class BuyerService
         }
         try {
             DB::beginTransaction();
-            $lottery = Buyer::find($phone);
+            $lottery = Buyer::find($id);
             if(!$lottery){
                 return response()->json([
                     'success' => false,

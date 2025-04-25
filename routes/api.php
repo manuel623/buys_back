@@ -64,7 +64,7 @@ Route::middleware('auth:api')->group(function () {
         Route::get('/listBuyer', [BuyerController::class, 'listBuyer']);
         Route::get('/getBuyerByDocument/{document}', [BuyerController::class, 'getBuyerByDocument']);
         Route::post('/createBuyer', [BuyerController::class, 'createBuyer']);
-        Route::put('/editBuyer/{phone}', [BuyerController::class, 'editBuyer']);
+        Route::put('/editBuyer/{id}', [BuyerController::class, 'editBuyer']);
         Route::delete('/deleteBuyer/{phone}', [BuyerController::class, 'deleteBuyer']);
     });
 
