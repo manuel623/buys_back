@@ -14,7 +14,7 @@ class ProductService
      */
     public function listProduct()
     {
-        $products = Product::select('id', 'name', 'price', 'created_at', 'updated_at')
+        $products = Product::select('id', 'name', 'price', 'description', 'stock', 'created_at', 'updated_at')
             ->orderBy('created_at', 'desc') //responde los productos ordenados por fecha de creacion 
             ->get();
         return response()->json([
@@ -38,6 +38,8 @@ class ProductService
             $product = Product::create([
                 'name' => $data->input('name'),
                 'price' => $data->input('price'),
+                'description' => $data->input('description'),
+                'stock' => $data->input('stock'),
             ]);
             DB::commit();
 
@@ -76,6 +78,8 @@ class ProductService
             $product->update([
                 'name' => $data->input('name'),
                 'price' => $data->input('price'),
+                'description' => $data->input('description'),
+                'stock' => $data->input('stock'),
             ]);
             DB::commit();
 
@@ -129,6 +133,8 @@ class ProductService
                 'id' => $product->id,
                 'name' => $product->name,
                 'price' => $product->price,
+                'description' => $product->description,
+                'stock' => $product->stock,
                 'total_sales' => $item->total_sales,
             ];
         });
