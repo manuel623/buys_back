@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->decimal('total', 10, 2)->default(0);
+            $table->text('description')->nullable();
+            $table->date('billing_date')->nullable();
+            $table->string('payment_method')->nullable();
+            $table->boolean('has_discount')->default(false);
             $table->timestamps();
         });
     }

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +30,23 @@ Route::middleware('auth:api')->group(function () {
         Route::post('/createUser', [UserController::class, 'createUser']);
         Route::put('/editUser/{id?}', [UserController::class, 'editUser']);
         Route::delete('/deleteUser/{id?}', [UserController::class, 'deleteUser']);
+    });
+
+    //Productos
+    Route::prefix('product')->middleware('auth:api')->group(function () {
+        Route::get('/listProduct', [ProductController::class, 'listProduct']);
+        Route::get('/topPurchasedProducts', [ProductController::class, 'topPurchasedProducts']);
+        Route::post('/createProduct', [ProductController::class, 'createProduct']);
+        Route::put('/editProduct/{id?}', [ProductController::class, 'updateProduct']);
+        Route::delete('/deleteProduct/{id?}', [ProductController::class, 'deleteProduct']);
+    });
+
+    //Ordenes
+    Route::prefix('order')->middleware('auth:api')->group(function () {
+        Route::get('/listOrder', [OrderController::class, 'listOrder']);
+        Route::post('/createOrder', [OrderController::class, 'createOrder']);
+        Route::put('/editOrder/{id?}', [OrderController::class, 'updateOrder']);
+        Route::delete('/deleteOrder/{id?}', [OrderController::class, 'deleteOrder']);
     });
 
 });

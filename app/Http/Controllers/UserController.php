@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\UsuarioService;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -12,7 +12,7 @@ class UserController extends Controller
     /**
     * Instancia el servicio UsuarioService
     */
-    public function __construct(UsuarioService $usuarioService)
+    public function __construct(UserService $usuarioService)
     {
         $this->usuarioService = $usuarioService;
     }

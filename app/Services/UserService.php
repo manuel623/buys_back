@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
-class UsuarioService
+class UserService
 {
     /**
      * Obtiene todos los usuarios
