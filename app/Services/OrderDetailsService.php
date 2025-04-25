@@ -14,8 +14,8 @@ class OrderDetailService
      */
     public function listOrderDetail()
     {
-        $orders = OrderDetail::select('id', 'order_id', 'product_id', 'quantity', 'unit_price', 'subtotal', 'created_at', 'updated_at')
-            ->with('order', 'product') // carga las relaciones con las demas tablas
+        $orders = OrderDetail::select('id', 'order_id', 'product_id', 'buyer_id', 'quantity', 'unit_price', 'subtotal', 'created_at', 'updated_at')
+            ->with('order', 'product', 'buyer') // carga las relaciones con las demas tablas
             ->orderBy('created_at', 'desc') // ordena los detalles por fecha de creación
             ->get();
         return response()->json([
@@ -40,6 +40,7 @@ class OrderDetailService
             $orderDetail = OrderDetail::create([
                 'order_id' => $data->input('order_id'),
                 'product_id' => $data->input('product_id'),
+                'buyer_id' => $data->input('buyer_id'),
                 'quantity' => $data->input('quantity'),
                 'unit_price' => $data->input('unit_price'),
                 'subtotal' => $subtotal,
@@ -82,6 +83,7 @@ class OrderDetailService
             $orderDetail->update([
                 'order_id' => $data->input('order_id'),
                 'product_id' => $data->input('product_id'),
+                'buyer_id' => $data->input('buyer_id'),
                 'quantity' => $data->input('quantity'),
                 'unit_price' => $data->input('unit_price'),
                 'subtotal' => $subtotal,
@@ -123,6 +125,7 @@ class OrderDetailService
         $rules = [
             'order_id' => 'required|exists:orders,id',
             'product_id' => 'required|exists:products,id',
+            'buyer_id' => 'required|exists:buyers,id',
             'quantity' => 'required|integer|min:1',
             'unit_price' => 'required|numeric|min:0',
         ];

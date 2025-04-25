@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('order_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('product_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('order_id')->constrained('orders')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('product_id')->constrained('products')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('buyer_id')->constrained('buyers')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('quantity');
             $table->decimal('unit_price', 10, 2);
             $table->decimal('subtotal', 10, 2);
             $table->timestamps();
-            $table->index(['order_id', 'product_id']); // indice adicional para consultas rapidas
+            $table->index(['order_id', 'product_id', 'buyer_id']); // indice adicional para consultas rapidas
         });
     }
 
