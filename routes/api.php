@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BuyerController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderDetailController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -47,6 +49,23 @@ Route::middleware('auth:api')->group(function () {
         Route::post('/createOrder', [OrderController::class, 'createOrder']);
         Route::put('/editOrder/{id?}', [OrderController::class, 'updateOrder']);
         Route::delete('/deleteOrder/{id?}', [OrderController::class, 'deleteOrder']);
+    });
+
+    //Detalles Ordenes
+    Route::prefix('orderDetail')->middleware('auth:api')->group(function () {
+        Route::get('/listOrderDetail', [OrderDetailController::class, 'listOrderDetail']);
+        Route::post('/createOrderDetail', [OrderDetailController::class, 'createOrderDetail']);
+        Route::put('/editOrderDetail/{id?}', [OrderDetailController::class, 'updateOrderDetail']);
+        Route::delete('/deleteOrderDetail/{id?}', [OrderDetailController::class, 'deleteOrderDetail']);
+    });
+
+    //Comprador
+    Route::prefix('buyer')->middleware('auth:api')->group(function () {
+        Route::get('/listBuyer', [BuyerController::class, 'listBuyer']);
+        Route::get('/getBuyerByDocument/{document}', [BuyerController::class, 'getBuyerByDocument']);
+        Route::post('/createBuyer', [BuyerController::class, 'createBuyer']);
+        Route::put('/editBuyer/{phone}', [BuyerController::class, 'editBuyer']);
+        Route::delete('/deleteBuyer/{phone}', [BuyerController::class, 'deleteBuyer']);
     });
 
 });

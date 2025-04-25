@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Buyer extends Model
 {
     use HasFactory;
-    protected $table = 'buyer';
+    protected $table = 'buyers';
 
     protected $fillable = [
         'document',
