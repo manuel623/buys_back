@@ -14,7 +14,7 @@ class OrderService
      */
     public function listOrder()
     {
-        $orders = Order::select('id', 'total', 'description', 'billing_date', 'payment_method', 'has_discount', 'created_at', 'updated_at')
+        $orders = Order::select('id', 'total', 'description', 'billing_date', 'payment_method', 'created_at', 'updated_at')
             ->orderBy('created_at', 'desc') // responde las ordenes ordenadas por fecha de creación
             ->get();
         return response()->json([
@@ -39,8 +39,7 @@ class OrderService
                 'total' => $data->input('total'),
                 'description' => $data->input('description'),
                 'billing_date' => $data->input('billing_date'),
-                'payment_method' => $data->input('payment_method'),
-                'has_discount' => $data->input('has_discount'),
+                'payment_method' => $data->input('payment_method')
             ]);
             DB::commit();
 
@@ -79,8 +78,7 @@ class OrderService
                 'total' => $data->input('total'),
                 'description' => $data->input('description'),
                 'billing_date' => $data->input('billing_date'),
-                'payment_method' => $data->input('payment_method'),
-                'has_discount' => $data->input('has_discount'),
+                'payment_method' => $data->input('payment_method')
             ]);
             DB::commit();
 
@@ -118,9 +116,8 @@ class OrderService
         $rules = [
             'total' => 'required|numeric|min:0',
             'description' => 'nullable|string|max:1000',
-            'billing_date' => 'nullable|date',
-            'payment_method' => 'nullable|string|max:255',
-            'has_discount' => 'nullable|boolean',
+            'billing_date' => 'required|date',
+            'payment_method' => 'required|string|max:255'
         ];
 
         return Validator::make($data->all(), $rules);
