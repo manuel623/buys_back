@@ -10,6 +10,32 @@ use Illuminate\Validation\Rule;
 class OrderDetailService
 {
     /**
+     * funcion para obtener los detalles de una orden especifica
+     */
+    public function getOrderDetailsByOrderId($orderId)
+    {
+        try {
+            $orderDetails = OrderDetail::where('order_id', $orderId)
+                ->with('order', 'product', 'buyer')
+                ->get();
+
+            if ($orderDetails->isEmpty()) {
+                return response()->json(['success' => false, 'message' => 'No se encontraron detalles para esta orden.'], 404);
+            }
+
+            return response()->json([
+                'success' => true,
+                'data' => $orderDetails
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
      * Obtiene todos los detalles
      */
     public function listOrderDetail()

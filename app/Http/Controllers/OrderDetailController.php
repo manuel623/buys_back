@@ -18,6 +18,14 @@ class OrderDetailController extends Controller
     }
 
     /** 
+     * Funcion para obtener los detalles de una orden específica
+     */
+    public function getOrderDetails($orderId)
+    {
+        $data = $this->orderDetailService->getOrderDetailsByOrderId($orderId);
+        return response()->json($data);
+    }
+    /** 
      * Funcion para listar los detalles de la orden
      */
     public function listOrderDetail()

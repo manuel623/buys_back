@@ -55,6 +55,7 @@ Route::middleware('auth:api')->group(function () {
     //Detalles Ordenes
     Route::prefix('orderDetail')->middleware('auth:api')->group(function () {
         Route::get('/listOrderDetail', [OrderDetailController::class, 'listOrderDetail']);
+        Route::get('/getOrderDetails/{orderId}', [OrderDetailController::class, 'getOrderDetails']);
         Route::post('/createOrderDetail', [OrderDetailController::class, 'createOrderDetail']);
         Route::put('/editOrderDetail/{id?}', [OrderDetailController::class, 'updateOrderDetail']);
         Route::delete('/deleteOrderDetail/{id?}', [OrderDetailController::class, 'deleteOrderDetail']);
