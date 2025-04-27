@@ -95,6 +95,54 @@ class ProductService
     }
 
     /**
+     * funcion para actualizar el stock de un producto despues de una orden de compra
+     */
+    public function updateStock($data, $id)
+    {
+        $validator = Validator::make($data->all(), [
+            'stock' => 'required|integer|min:0',
+        ]);
+
+        if ($validator->fails()) {
+            return [
+                'success' => false,
+                'errors' => $validator->errors()
+            ];
+        }
+
+        try {
+            DB::beginTransaction();
+
+            $product = Product::find($id);
+
+            if (!$product) {
+                return [
+                    'success' => false,
+                    'message' => 'Producto no encontrado'
+                ];
+            }
+
+            $product->stock = $data->input('stock');
+            $product->save();
+
+            DB::commit();
+
+            return [
+                'success' => true,
+                'message' => 'Stock actualizado con éxito',
+                'data' => $product
+            ];
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return [
+                'success' => false,
+                'message' => 'Error: ' . $e->getMessage()
+            ];
+        }
+    }
+
+
+    /**
      * Elimina un producto
      */
     public function deleteProduct($id)

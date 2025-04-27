@@ -44,6 +44,15 @@ class ProductController extends Controller
         return response()->json($data);
     }
 
+    /**
+     * funcacion para actualizar el stock
+     */
+    public function updateStock(Request $request, $id)
+    {
+        $data = $this->productService->updateStock($request, $id);
+        return response()->json($data);
+    }
+
     /** 
      * Funcion para eliminar los productos 
      */

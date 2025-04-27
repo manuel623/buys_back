@@ -40,6 +40,7 @@ Route::middleware('auth:api')->group(function () {
         Route::get('/topPurchasedProducts', [ProductController::class, 'topPurchasedProducts']);
         Route::post('/createProduct', [ProductController::class, 'createProduct']);
         Route::put('/editProduct/{id?}', [ProductController::class, 'updateProduct']);
+        Route::patch('/updateStock/{id?}', [ProductController::class, 'updateStock']);
         Route::delete('/deleteProduct/{id?}', [ProductController::class, 'deleteProduct']);
     });
 
