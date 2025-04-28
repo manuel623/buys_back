@@ -163,9 +163,12 @@ class ProductService
     public function topPurchasedProducts()
     {
         $topProducts = DB::table('order_details')
-            ->select('product_id', DB::raw('COUNT(*) as total_sales'))
+            ->select('product_id', 
+                DB::raw('COUNT(*) as total_sales'),
+                DB::raw('SUM(quantity) as total_units_sold') 
+            )
             ->groupBy('product_id')
-            ->orderByDesc('total_sales')
+            ->orderByDesc('total_units_sold')
             ->limit(3)
             ->get();
 
@@ -184,6 +187,7 @@ class ProductService
                 'description' => $product->description,
                 'stock' => $product->stock,
                 'total_sales' => $item->total_sales,
+                'total_units_sold' => $item->total_units_sold
             ];
         });
 
