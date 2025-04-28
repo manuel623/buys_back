@@ -13,7 +13,7 @@ class ProductSeeder extends Seeder
             [
                 'name' => 'Teclado Mecánico RGB',
                 'description' => 'Teclado mecánico con retroiluminación RGB, ideal para gamers.',
-                'price' => 200000.99,
+                'price' => 200000.00,
                 'stock' => 50,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -21,7 +21,7 @@ class ProductSeeder extends Seeder
             [
                 'name' => 'Mouse Inalámbrico',
                 'description' => 'Mouse ergonómico inalámbrico con precisión ajustable.',
-                'price' => 79500.50,
+                'price' => 79500.00,
                 'stock' => 100,
                 'created_at' => now(),
                 'updated_at' => now(),
